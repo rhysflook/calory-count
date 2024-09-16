@@ -67,6 +67,7 @@ class CaloryChart extends ApexChartWidget
                         'fontFamily' => 'inherit',
                     ],
                 ],
+                'decimalsInFloat' => 0
             ],
             'colors' => ['#f59e0b'],
             'stroke' => [
