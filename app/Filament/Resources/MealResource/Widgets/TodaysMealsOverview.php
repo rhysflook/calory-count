@@ -35,12 +35,7 @@ class TodaysMealsOverview extends BaseWidget
             $this->fat += $fat_count;
             $this->carbs += $carbs_count;
         }
-        $totals = Meal::whereDate('meals.created_at', now()->toDateString())->select(
-            \DB::raw('SUM(f.calories) as calories'),
-            \DB::raw('SUM(f.protein) as protein'),
-            \DB::raw('SUM(f.fat) as fat'),
-            \DB::raw('SUM(f.carbs) as carbs')
-            )->leftJoin('food as f', 'f.id', 'meals.food_id')->first();
+
         return [
             Stat::make('Total calories', round($this->calories, 2)),
             Stat::make('Total protein', round($this->protein, 2)),
