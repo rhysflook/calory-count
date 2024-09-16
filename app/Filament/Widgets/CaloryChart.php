@@ -31,7 +31,7 @@ class CaloryChart extends ApexChartWidget
     protected function getOptions(): array
     {
         // $calory_count = $meal->food->calories * ($meal->amount / $meal->food->amount);
-         $calories = Meal::query()->select(DB::raw('SUM(f.calories * (meals.amount / f.amount)) as calories'), DB::raw('DATE(meals.created_at) as created_at'))
+         $calories = Meal::query()->select(DB::raw('SUM(f.calories * (meals.amount / f.amount::double precision)) as calories'), DB::raw('DATE(meals.created_at) as created_at'))
             ->leftJoin('food as f', 'f.id', 'meals.food_id')
             ->groupBy(DB::raw('DATE(meals.created_at)'))
             ->orderBy('created_at')

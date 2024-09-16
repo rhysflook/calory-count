@@ -33,9 +33,9 @@ class MacrosChart extends ApexChartWidget
 
                 // $calory_count = $meal->food->calories * ($meal->amount / $meal->food->amount);
          $macros = Meal::query()->select(
-            DB::raw('SUM(f.protein * (meals.amount / f.amount)) as protein'),
-            DB::raw('SUM(f.carbs * (meals.amount / f.amount)) as carbs'),
-            DB::raw('SUM(f.fat * (meals.amount / f.amount)) as fat'),
+            DB::raw('SUM(f.protein * (meals.amount / f.amount::double precision)) as protein'),
+            DB::raw('SUM(f.carbs * (meals.amount / f.amount::double precision)) as carbs'),
+            DB::raw('SUM(f.fat * (meals.amount / f.amount::double precision)) as fat'),
             DB::raw('DATE(meals.created_at) as created_at'))
             ->leftJoin('food as f', 'f.id', 'meals.food_id')
             ->groupBy(DB::raw('DATE(meals.created_at)'))
